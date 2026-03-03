@@ -1,6 +1,5 @@
 from flask import Flask, request, jsonify
-from cipher.caesar import CaesarCipher
-from cipher.vigenere import VigenereCipher
+from cipher import CaesarCipher, VigenereCipher
 
 app = Flask(__name__)
 
