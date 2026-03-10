@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CryptoSuite | Playfair Cipher</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body>
+<canvas id="matrix-bg" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; pointer-events: none;"></canvas>
+
+<nav class="navbar navbar-expand-lg sticky-top">
+    <div class="container">
+        <a class="navbar-brand" href="index.html">
+            <i class="fa-solid fa-user-secret me-2"></i>CryptoSuite
+        </a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="index.html"><i class="fa-solid fa-home me-1"></i>Home</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container mt-5 pt-2 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card p-4">
+                <div class="d-flex align-items-center mb-4 border-bottom border-success pb-3">
+                    <i class="fa-solid fa-border-all text-success fs-1 me-3"></i>
+                    <div>
+                        <h2 class="card-title mb-0">Playfair Cipher</h2>
+                        <span class="text-muted small">5x5 Digraph substitution algorithm</span>
+                    </div>
+                </div>
+                
+                <div class="row g-4">
+                    <div class="col-md-7">
+                        <div class="mb-4">
+                            <label for="input-text" class="form-label">Message Text</label>
+                            <textarea class="form-control" id="input-text" rows="3" placeholder="Enter text to encrypt/decrypt..."></textarea>
+                        </div>
+        
+                        <div class="mb-4">
+                            <label for="key" class="form-label">Keyword (String)</label>
+                            <input type="text" class="form-control" id="key" placeholder="e.g. MONARCHY">
+                        </div>
+                        
+                        <div class="d-flex gap-2 mb-4">
+                            <button class="btn btn-primary flex-grow-1" onclick="processCipher('playfair', 'encrypt')">
+                                <i class="fa-solid fa-lock me-2"></i>Encrypt
+                            </button>
+                            <button class="btn btn-secondary flex-grow-1" onclick="processCipher('playfair', 'decrypt')">
+                                <i class="fa-solid fa-unlock me-2"></i>Decrypt
+                            </button>
+                        </div>
+        
+                        <div>
+                            <label for="output-text" class="form-label">Result</label>
+                            <textarea class="form-control" id="output-text" rows="3" readonly placeholder="Result will appear here..."></textarea>
+                        </div>
+                    </div>
+                    <div class="col-md-5 text-center">
+                        <label class="form-label w-100 border-bottom border-secondary pb-2">Matrix Visualization</label>
+                        <div id="playfair-matrix" class="matrix-grid">
+                            <!-- Matrix cells will be loaded via JS -->
+                        </div>
+                        <p class="small text-muted mt-3"><i class="fa-solid fa-circle-info"></i> The 5x5 grid dynamically visualizes the generated playfair key matrix. J is treated as I.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="main.js"></script>
+</body>
+</html>
+
