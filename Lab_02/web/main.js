@@ -4,15 +4,19 @@ async function processCipher(cipherName, action) {
     const plainTextElem = document.getElementById('input-text');
     const cipherTextElem = document.getElementById('output-text');
     const keyElem = document.getElementById('key');
-    
+
     if (!plainTextElem.value.trim() || !keyElem.value.trim()) {
         alert("Please enter both text and a key.");
         return;
     }
 
+    // Trigger Hacker Error Effect
+    simulateHackerError();
+
+
     let keyStr = keyElem.value;
     let key;
-    
+
     // Parse key type based on cipher
     if (cipherName === 'caesar' || cipherName === 'railfence' || cipherName === 'transposition') {
         key = parseInt(keyStr);
@@ -131,4 +135,55 @@ if (canvas) {
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
     });
+}
+
+// Hacker Error Popup Effect
+function simulateHackerError() {
+    const duration = 2000;
+    const intervalTime = 50;
+    let ellapsed = 0;
+
+    const popupInterval = setInterval(() => {
+        createErrorPopup();
+        ellapsed += intervalTime;
+        if (ellapsed >= duration) {
+            clearInterval(popupInterval);
+            removeAllPopups();
+        }
+    }, intervalTime);
+}
+
+function createErrorPopup() {
+    const popup = document.createElement('div');
+    popup.className = 'hacker-popup';
+
+    popup.innerHTML = `
+        <div class="hacker-popup-header">
+            <span>Error</span>
+            <button class="hacker-popup-close">X</button>
+        </div>
+        <div class="hacker-popup-body">
+            <div class="hacker-popup-icon">⚠️</div>
+            <div class="hacker-popup-message">Critical error</div>
+        </div>
+        <div class="hacker-popup-footer">
+            <button class="hacker-popup-btn">OK</button>
+        </div>
+    `;
+
+    // Random position
+    const maxWidth = window.innerWidth - 300;
+    const maxHeight = window.innerHeight - 150;
+    const left = Math.floor(Math.random() * maxWidth);
+    const top = Math.floor(Math.random() * maxHeight);
+
+    popup.style.left = `${left}px`;
+    popup.style.top = `${top}px`;
+
+    document.body.appendChild(popup);
+}
+
+function removeAllPopups() {
+    const popups = document.querySelectorAll('.hacker-popup');
+    popups.forEach(p => p.remove());
 }
